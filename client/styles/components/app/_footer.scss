@@ -1,0 +1,154 @@
+// App Footer
+.app-footer {
+  text-shadow: 1px 2px 3px rgba(88, 88, 88, 0.8);
+  background-color: $themeColor;
+  color: #fff;
+  position: relative;
+  .app-footer-list {
+    display: flex;
+    list-style-type: none;
+    width: 100%;
+    justify-content: space-around;
+    height: 100%;
+    align-items: center;
+
+    @media screen and (min-width: 768px) {
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    @media screen and (min-width: 768px) {
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+  }
+
+  .footer-icon {
+    font-size: 1.5rem;
+
+    @media screen and (min-width: 768px) and (min-height: 900px) {
+      font-size: 1.6rem;
+    }
+  }
+
+  .app-footer-list__item {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media screen and (min-width: 468px) {
+      font-size: 1.7rem;
+    }
+
+    @media screen and (min-width: 768px) {
+      height: auto;
+      padding: 1rem 0;
+    }
+  }
+
+  .app-footer-list__link {
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    flex-direction: column;
+
+    &.active {
+      color: #ff00ff;
+    }
+  }
+
+  // Dropdown
+  .app-footer-dropdown {
+    display: flex;
+    list-style-type: none;
+    flex-direction: column;
+    position: absolute;
+    bottom: 100%;
+    z-index: 1001;
+    text-align: center;
+    background-color: $lightThemeColor;
+    transform: scaleY(0);
+    transition: transform 0.2s ease;
+    transform-origin: bottom;
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+      position: static;
+      transform: scaleY(1);
+      background-color: unset;
+    }
+
+    &.is-active {
+      transform: scaleY(1);
+    }
+
+    .footer-icon {
+      display: none;
+    }
+
+    .app-footer-dropdown__link {
+      width: 100%;
+      display: block;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 1.2rem 0;
+      font-size: 1.2rem;
+
+      @media screen and (max-width: 767px) {
+        .link-title {
+          display: block;
+        }
+      }
+    }
+
+    .app-footer-dropdown__item {
+      border-bottom: 1px solid darken($themeColor, 10%);
+
+      @media screen and (min-width: 768px) {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .link-title {
+    display: none;
+    @media screen and (min-width: 998px) {
+      text-align: center;
+      display: block;
+      width: 90%;
+      margin: 0 auto;
+      margin-top: 0.5rem;
+      font-size: 0.7rem;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .app-footer-list__dropdown-toggler {
+      display: none;
+    }
+
+    .app-footer-dropdown .footer-icon {
+      display: block;
+    }
+
+    .app-footer-dropdown .app-footer-dropdown__link.active {
+      color: #ff00f7;
+    }
+
+    .app-footer-list__link,
+    .app-footer-dropdown__link {
+      transition: transform 0.1s ease-in-out, color 0.1s ease-in-out;
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+}

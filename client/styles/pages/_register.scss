@@ -1,0 +1,62 @@
+// Register page
+.register-page {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background-color: #eeeeee;
+  height: 100%;
+  position: relative;
+
+  @media screen and (min-width: 768px) {
+    align-items: center;
+    background-image: url("/img/home-bg.png");
+  }
+
+  .register-title {
+    color: $mainDarkColor;
+    margin-bottom: 2rem;
+  }
+
+  .register-container {
+    max-width: 900px;
+    @media screen and (min-width: 768px) {
+      border-radius: 5px;
+      position: relative;
+      z-index: 1;
+      margin: 0 auto;
+      box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    @media screen and (min-width: 768px) {
+      background: $whiteBgColor;
+      padding: 3rem;
+    }
+  }
+
+  .register-form__input {
+    margin-bottom: 1rem;
+  }
+
+  .register-form__btn {
+    width: 100%;
+    margin-top: 1rem;
+
+    @media screen and (min-width: 768px) {
+      font-size: 1.1rem;
+      max-width: 300px;
+      margin: 2rem auto 0 auto;
+    }
+  }
+
+  .form-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+    text-align: left;
+  }
+
+  .register-page__alert {
+    margin-bottom: 1rem;
+  }
+}

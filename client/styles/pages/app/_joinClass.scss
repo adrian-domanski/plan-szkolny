@@ -1,0 +1,13 @@
+// App - Create class
+.join-class {
+  max-width: 900px;
+  margin: 0 auto;
+
+  .create-class__input:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  .create-class__btn {
+    margin-top: 0.5rem;
+  }
+}

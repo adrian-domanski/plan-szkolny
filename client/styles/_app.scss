@@ -1,0 +1,23 @@
+// Pages
+@import "./pages/app/cms/home";
+@import "./pages/app/cms/addTask";
+@import "./pages/app/cms/addNotification";
+@import "./pages/app/cms/settings";
+@import "./pages/app/cms/tasksEdit";
+@import "./pages/app/cms/notificationsEdit";
+@import "./pages/app/cms/membersList";
+@import "./pages/app/myAccount";
+@import "./pages/app/createClass";
+@import "./pages/app/joinClass";
+@import "./pages/app/tasks";
+@import "./pages/app/notifications";
+@import "./pages/app/taskDetails";
+@import "./pages/app/schoolPlan";
+@import "./pages/app/chat";
+
+// Components
+@import "./components/app/header";
+@import "./components/app/timeline";
+@import "./components/app/footer";
+@import "./components/app/tasks";
+@import "./components/app/Notifications";

@@ -1,0 +1,12 @@
+{
+  "mongoURI": "",
+  "gmailUser": "",
+  "gmailPass": "",
+  "jwtSecret": "",
+  "awsConfig": {
+    "accessKeyId": "",
+    "secretAccessKey": "",
+    "region": ""
+  },
+  "awsBucket": ""
+}

@@ -1,0 +1,29 @@
+// Task details
+.task-details {
+  max-width: 900px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .task-details__description,
+  .task-details__date {
+    color: $leadColor;
+    font-size: 1.2rem;
+  }
+
+  .task-details-actions__own-task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .task-details-actions__btn {
+    width: 48%;
+  }
+
+  .task-details-actions__back {
+    width: 100%;
+  }
+}

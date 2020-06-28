@@ -1,0 +1,30 @@
+// Cms home page
+.cms-settings {
+  max-width: 900px;
+  margin: 0 auto;
+
+  .cms-settings-label {
+    color: $mainDarkColor;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .cms-settings__input {
+    margin-bottom: 1rem;
+  }
+
+  .cms-settings__submit {
+    margin-top: 1.5rem;
+  }
+
+  .school-plan-preview {
+    margin-bottom: 1rem;
+  }
+
+  .school-plan-preview__img {
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+  }
+}

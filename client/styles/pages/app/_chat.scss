@@ -1,0 +1,106 @@
+// App - chat
+.app-chat {
+  @media screen and (min-width: 998px) {
+    padding: 2rem 4rem;
+  }
+  .chatbox {
+    border: 2px solid #e1e1e1;
+    height: 45vh;
+    background-color: #f5f5f5;
+    overflow-y: auto;
+
+    @media screen and (min-width: 998px) {
+      padding: 0 2%;
+    }
+  }
+
+  .chatbox-message-form__message {
+    background-color: #f5f5f5;
+  }
+
+  .chatbox-message {
+    display: grid;
+    grid-template-areas:
+      "a n"
+      "a d"
+      "a t";
+    grid-template-columns: 40px 1fr;
+    margin: 1.5rem 1rem;
+    column-gap: 1rem;
+
+    @media screen and (min-width: 768px) {
+      grid-template-areas:
+        "a n d"
+        "a t t"
+        "a t t";
+      column-gap: 1.5rem;
+    }
+  }
+
+  .message-date {
+    grid-area: d;
+    font-size: 0.7rem;
+    align-self: center;
+    color: $leadColor;
+    opacity: 0.5;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+
+    @media screen and (min-width: 768px) {
+      font-size: 0.8rem;
+    }
+  }
+
+  .author-name {
+    grid-area: n;
+    color: $leadColor;
+    font-size: 0.9rem;
+
+    &.me {
+      color: rgb(0, 117, 0);
+      font-weight: bold;
+    }
+
+    @media screen and (min-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+
+  .author-avatar {
+    grid-area: a;
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.301);
+
+    @media screen and (min-width: 768px) {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .chatbox-message__msg {
+    grid-area: t;
+
+    @media screen and (min-width: 768px) {
+      font-size: 1.1rem;
+    }
+  }
+
+  .author-avatar__img {
+    width: 100%;
+  }
+
+  // Message form
+  .chatbox-message-form__message {
+    resize: none;
+    height: 100px;
+  }
+
+  .chatbox-message-form__send {
+    max-width: 300px;
+    display: block;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,93 @@
+// Montserrat font
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap&subset=latin-ext");
+
+@import "./var";
+@import "./globals";
+
+// Components
+@import "./components/Navbar";
+@import "./components/Footer";
+@import "./components/Modal";
+
+// Pages
+@import "./pages/index.scss";
+@import "./pages/register.scss";
+@import "./pages/login.scss";
+@import "./pages/other.scss";
+// App Pages
+@import "./app";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  @media screen and (min-width: 600px) {
+    font-size: 17px;
+  }
+}
+
+body,
+html {
+  height: 100%;
+  overflow: auto;
+  background-color: $whiteBgColor;
+}
+
+body {
+  font-family: $font;
+}
+
+.content.app {
+  overflow-y: scroll;
+}
+
+.content {
+  grid-area: content;
+  height: 100%;
+}
+
+#__next {
+  display: grid;
+  grid-template-rows: 60px 1fr 45px;
+  grid-template-areas:
+    "navbar"
+    "content"
+    "footer";
+  height: 100%;
+
+  @media screen and (min-height: 800px) {
+    grid-template-rows: 70px 1fr 60px;
+  }
+
+  @media screen and (min-width: 768px) {
+    &.app {
+      grid-template-columns: 70px 1fr;
+      grid-template-areas:
+        "navbar navbar"
+        "appFooter content"
+        "footer footer";
+
+      @media screen and (min-width: 998px) {
+        grid-template-columns: 115px 1fr;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .l-header {
+    grid-area: navbar;
+  }
+
+  .app-footer {
+    grid-area: appFooter;
+  }
+
+  .main-footer {
+    grid-area: footer;
+  }
+}

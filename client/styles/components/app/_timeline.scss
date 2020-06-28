@@ -1,0 +1,107 @@
+.timeline {
+  border-top: 1px solid darken($whiteBgColor, 10%);
+  border-bottom: 1px solid darken($whiteBgColor, 10%);
+  height: 100%;
+  background-color: #f8f8f8;
+
+  .timeline-grid {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    max-width: 600px;
+
+    @media screen and (min-width: 768px) {
+      padding: 1.5rem;
+    }
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    text-align: center;
+    transition: background-color 0.1s ease;
+    cursor: pointer;
+    @media screen and (min-width: 468px) {
+      font-size: 1.2rem;
+    }
+
+    .timeline-item__day-number {
+      position: relative;
+    }
+
+    .timeline-item__day-short {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &.has-tasks {
+      .timeline-item__day-number:after {
+        content: "";
+        width: 4px;
+        height: 4px;
+        background-color: rgb(255, 0, 255);
+        position: absolute;
+        bottom: 5px;
+        border-radius: 50%;
+
+        @media screen and (min-width: 468px) {
+          height: 6px;
+          width: 6px;
+        }
+
+        @media screen and (min-width: 768px) {
+          height: 8px;
+          width: 8px;
+        }
+      }
+    }
+
+    &.today {
+      font-weight: 500;
+
+      .timeline-item__day-number {
+        background-color: #e2e2e2;
+      }
+    }
+
+    &.selected {
+      font-weight: 500;
+
+      .timeline-item__day-number {
+        transition: background-color 0.1s ease, color 0.1s ease;
+        background-color: #5d00ff;
+        color: #fff;
+      }
+    }
+  }
+
+  .timeline-item__day-number {
+    height: 35px;
+    width: 35px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #eee;
+    }
+
+    @media screen and (min-width: 468px) {
+      height: 42px;
+      width: 42px;
+    }
+
+    @media screen and (min-width: 768px) {
+      height: 50px;
+      width: 50px;
+    }
+  }
+}

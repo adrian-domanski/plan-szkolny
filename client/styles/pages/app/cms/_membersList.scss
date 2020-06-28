@@ -1,0 +1,42 @@
+.cms-members {
+  &.container {
+    padding: 2rem 1rem;
+  }
+  max-width: 900px;
+  margin: 0 auto;
+  .members-list {
+    list-style-type: none;
+    background-color: $accentGreyColor;
+    padding: 1rem;
+
+    @media screen and (min-width: 768px) {
+      margin-top: 2rem;
+    }
+
+    @media screen and (min-width: 900px) {
+      padding: 1rem 2rem;
+    }
+  }
+
+  .members-list__item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    align-items: center;
+  }
+
+  .members-list__item-action {
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.2);
+
+    &:nth-child(2) {
+      margin-left: 0.5rem;
+    }
+  }
+
+  .members-actions {
+    display: flex;
+  }
+}

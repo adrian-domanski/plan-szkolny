@@ -1,0 +1,19 @@
+// Notifications page
+.notification-page {
+  .replacements {
+    margin-bottom: 2rem;
+  }
+
+  .replacements-links {
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+  }
+
+  .replacements-links__item-link {
+    color: $themeColor;
+    font-weight: bold;
+    padding: 0.3rem 0;
+    text-decoration: none;
+  }
+}

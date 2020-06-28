@@ -1,0 +1,17 @@
+// Add notification
+.cms-add-notification {
+  max-width: 900px;
+  margin: 0 auto;
+  .cms-add-notification__input:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  .cms-add-notification__submit {
+    max-width: 400px;
+    margin: 1.5rem auto;
+  }
+
+  .cms-add-notification__alert {
+    margin-bottom: 1rem;
+  }
+}

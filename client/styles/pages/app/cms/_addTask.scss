@@ -1,0 +1,54 @@
+// Add task
+.cms-add-task {
+  max-width: 700px;
+  margin: 0 auto;
+  .cms-add-task__input:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  .cms-add-task__submit {
+    display: block;
+    margin-top: 1.5rem;
+    max-width: 250px;
+    margin: 1.5rem auto;
+  }
+
+  .cms-add-task__alert {
+    margin-bottom: 1rem;
+  }
+
+  .input-title {
+    position: relative;
+    overflow: visible;
+  }
+
+  .input-title__title:focus + .input-title__autocomplete {
+    display: block !important;
+  }
+
+  .input-title__autocomplete {
+    list-style: none;
+    background-color: $lightLeadColor;
+    position: absolute;
+    z-index: 90;
+    width: 100%;
+    display: block;
+    max-height: 100px;
+    overflow-y: scroll;
+    display: none;
+  }
+
+  .input-title__autocomplete-item {
+    border-bottom: 1px solid darken($lightLeadColor, 15%);
+    padding: 0.8rem 1rem;
+    display: block;
+
+    &:first-child {
+      background-color: darken($lightLeadColor, 10%);
+    }
+
+    &:hover {
+      background-color: darken($lightLeadColor, 10%);
+    }
+  }
+}

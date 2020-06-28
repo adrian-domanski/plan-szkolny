@@ -1,0 +1,74 @@
+// Login page
+.login-page {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background-color: #eeeeee;
+  position: relative;
+  height: 100%;
+
+  @media screen and (min-width: 768px) {
+    background-image: url("/img/home-bg.png");
+    align-items: center;
+  }
+
+  .particles-page-bg {
+    height: 100%;
+  }
+
+  .login-title {
+    color: $mainDarkColor;
+    margin-bottom: 2rem;
+  }
+
+  .login-container {
+    width: 100%;
+    max-width: 800px;
+    @media screen and (min-width: 768px) {
+      border-radius: 5px;
+      position: relative;
+      z-index: 1;
+      margin: 0 auto;
+      box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    @media screen and (min-width: 768px) {
+      background: #ffffff;
+      padding: 3rem;
+    }
+  }
+
+  .login-form__input {
+    margin-bottom: 1rem;
+  }
+
+  .login-form__btn {
+    width: 100%;
+    margin-top: 1rem;
+
+    @media screen and (min-width: 768px) {
+      font-size: 1.1rem;
+      max-width: 225px;
+      margin: 2rem auto 0 auto;
+    }
+  }
+
+  .form-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+    text-align: left;
+  }
+
+  .login-page__alert {
+    margin-bottom: 1rem;
+  }
+  .login-form__forget-password-link {
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    color: $themeColor;
+    text-align: right;
+  }
+}

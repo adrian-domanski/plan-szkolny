@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "subject": "Matematyka",
+    "color": "#8800FF"
+  },
+  {
+    "id": 2,
+    "subject": "Angielski",
+    "color": "#FFA200"
+  },
+  {
+    "id": 3,
+    "subject": "Polski",
+    "color": "#0090FF"
+  }
+]

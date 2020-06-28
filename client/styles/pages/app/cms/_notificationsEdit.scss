@@ -1,0 +1,50 @@
+// CMS - notifications edit
+.cms-notifications-edit {
+  max-width: 900px;
+  margin: 0 auto;
+  .notifications-list {
+    list-style-type: none;
+    background-color: $accentGreyColor;
+  }
+
+  .global-section-title {
+    padding: 1rem 0;
+  }
+
+  .notifications-list__item {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid darken($accentGreyColor, 8%);
+    }
+  }
+
+  .action {
+    padding: 0.5rem;
+    border-radius: 5px;
+    display: inline-block;
+    &--edit {
+      margin-left: auto;
+      color: #fff;
+      background-color: #28a745;
+      margin-right: 0.5rem;
+    }
+
+    &--delete {
+      color: #fff;
+      background-color: #dc3545;
+    }
+  }
+}
+
+// Single task edit
+.cms-notification-edit {
+  max-width: 900px;
+  margin: 0 auto;
+  .cms-notification-edit-form__input {
+    margin-bottom: 1rem;
+  }
+}

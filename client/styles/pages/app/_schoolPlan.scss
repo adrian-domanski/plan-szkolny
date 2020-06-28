@@ -1,0 +1,35 @@
+// School plan
+.app-lesson-plan {
+  .lesson-plan-container__info {
+    text-align: center;
+    font-size: 1.2rem;
+    color: $leadColor;
+  }
+  .lesson-plan-container {
+    overflow: auto;
+    max-height: 65vh;
+    margin: 0 auto;
+    border: 2px solid #e1e1e1;
+
+    @media screen and (min-width: 1200px) {
+      max-width: 60vw;
+    }
+  }
+
+  .lesson-plan-container__img {
+    display: block;
+    margin: 0 auto;
+
+    @media screen and (min-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  .app-lesson-plan__download {
+    text-decoration: none;
+    display: block;
+    max-width: 300px;
+    margin: 2rem auto;
+    text-align: center;
+  }
+}

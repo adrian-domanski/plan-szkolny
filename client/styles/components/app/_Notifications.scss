@@ -1,0 +1,64 @@
+.notifications-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  @media screen and (min-width: 768px) {
+    padding: 2rem 5%;
+  }
+
+  @media screen and (min-width: 768px) {
+    display: grid;
+    gap: 0.3rem;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (min-width: 998px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media screen and (min-width: 1400px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .notifications-grid__item {
+    display: grid;
+    grid-template-areas:
+      "f date"
+      "f t"
+      "f d";
+    grid-template-columns: 50px 1fr;
+    gap: 0.15rem;
+    &:not(:last-child) {
+      margin-bottom: 1.2rem;
+
+      @media screen and (min-width: 768px) {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .notifications-grid__item-flag {
+    grid-area: f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+  }
+
+  .notifications-grid__item-title {
+    padding-left: 1rem;
+    grid-area: t;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  .notifications-grid__item-description {
+    padding-left: 1rem;
+    grid-area: d;
+    font-size: 1rem;
+  }
+  .notifications-grid__item-date {
+    padding-left: 1rem;
+    grid-area: date;
+    color: $leadColor;
+    text-transform: capitalize;
+    font-size: 0.9rem;
+  }
+}

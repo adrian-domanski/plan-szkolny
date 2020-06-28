@@ -1,0 +1,19 @@
+// Footer
+.main-footer {
+  background-color: $themeColor;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .main-footer__copy {
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  @media screen and (max-width: 767px) {
+    &.app {
+      display: none;
+    }
+  }
+}
