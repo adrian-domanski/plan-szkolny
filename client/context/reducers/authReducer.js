@@ -7,22 +7,24 @@ export const initState = {
 
 export const authReducer = (state, action) => {
   const domain =
-    process.env.NODE_ENV !== "production" ? "localhost" : "plan-szkolny.pl";
+    process.env.NODE_ENV !== 'production'
+      ? 'localhost'
+      : 'plan-szkolny.kodario.pl';
   switch (action.type) {
-    case "UPDATE_TOKEN":
+    case 'UPDATE_TOKEN':
       const nowDate = new Date();
       nowDate.setDate(nowDate.getDate() + 3);
       document.cookie = `token=${
         action.payload
       }; domain=${domain}; path=/; expires=${nowDate.toUTCString()}`;
       break;
-    case "SET_LOADING":
+    case 'SET_LOADING':
       return {
         ...state,
         isLoading: true,
       };
-    case "REGISTER_SUCCESS":
-    case "LOGIN_SUCCESS":
+    case 'REGISTER_SUCCESS':
+    case 'LOGIN_SUCCESS':
       const now = new Date();
       now.setDate(now.getDate() + 3);
       document.cookie = `token=${
@@ -35,7 +37,7 @@ export const authReducer = (state, action) => {
         token: action.payload.token,
         isLoading: false,
       };
-    case "AUTH_SUCCESS":
+    case 'AUTH_SUCCESS':
       return {
         ...state,
         isAuth: true,
@@ -43,10 +45,10 @@ export const authReducer = (state, action) => {
         token: action.payload.token,
         isLoading: false,
       };
-    case "LOGOUT_SUCCESS":
-    case "REGISTER_ERROR":
-    case "LOGIN_ERROR":
-    case "AUTH_ERROR":
+    case 'LOGOUT_SUCCESS':
+    case 'REGISTER_ERROR':
+    case 'LOGIN_ERROR':
+    case 'AUTH_ERROR':
       document.cookie = `token=""; domain=${domain}; path=/; expires=${new Date().toUTCString()}`;
       return {
         ...state,

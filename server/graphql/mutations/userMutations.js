@@ -1,12 +1,12 @@
-const graphql = require("graphql");
-const User = require("../../models/User");
-const Image = require("../../models/Image");
-const Class = require("../../models/Class");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const config = require("config");
-const path = require("path");
-const { isAuth } = require("../../helpers/authHelpers");
+const graphql = require('graphql');
+const User = require('../../models/User');
+const Image = require('../../models/Image');
+const Class = require('../../models/Class');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('config');
+const path = require('path');
+const { isAuth } = require('../../helpers/authHelpers');
 
 // Object Types
 const {
@@ -14,14 +14,14 @@ const {
   LoginType,
   MessageType,
   ImageType,
-} = require("../objectTypes");
+} = require('../objectTypes');
 
-const { GraphQLUpload } = require("graphql-upload");
+const { GraphQLUpload } = require('graphql-upload');
 const { GraphQLString, GraphQLNonNull } = graphql;
 
 // Aws - user avatar
-const AWS = require("aws-sdk");
-AWS.config.update(config.get("awsConfig"));
+const AWS = require('aws-sdk');
+AWS.config.update(config.get('awsConfig'));
 const s3 = new AWS.S3();
 
 // Register
@@ -37,12 +37,12 @@ const createUser = {
   async resolve(_, args, ctx) {
     const { name, surname, classCode, email, password } = args;
     if (!email || !password || !name || !surname) {
-      throw new Error("Proszę podać wszystkie dane");
+      throw new Error('Proszę podać wszystkie dane');
     }
     // Check if user exist
     const fetchedUser = await User.findOne({ email });
     if (fetchedUser)
-      throw Error("Użytkownik z takim adresem e-mail już istnieje");
+      throw Error('Użytkownik z takim adresem e-mail już istnieje');
     // Hash password and create user
     const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -50,7 +50,7 @@ const createUser = {
     let myClass = null;
     if (classCode) {
       myClass = await Class.findOne({ code: classCode });
-      if (!myClass) throw Error("Nie znaleziono klasy o takim kodzie");
+      if (!myClass) throw Error('Nie znaleziono klasy o takim kodzie');
     }
 
     const newUser = new User({
@@ -58,7 +58,7 @@ const createUser = {
       surname,
       class: {
         code: classCode,
-        rank: classCode ? "member" : "",
+        rank: classCode ? 'member' : '',
       },
       email,
       password: hashedPassword,
@@ -70,25 +70,25 @@ const createUser = {
       await myClass.updateOne({ $push: { users: newUser._id } });
     }
 
-    const token = jwt.sign({ userId: user.id }, config.get("jwtSecret"), {
-      expiresIn: "1d",
+    const token = jwt.sign({ userId: user.id }, config.get('jwtSecret'), {
+      expiresIn: '1d',
     });
 
     // Send confirm email
     const emailToken = jwt.sign(
-      { userId: user.id, type: "REGISTER_CONFIRM" },
-      config.get("jwtSecret"),
-      { expiresIn: "1d" }
+      { userId: user.id, type: 'REGISTER_CONFIRM' },
+      config.get('jwtSecret'),
+      { expiresIn: '1d' }
     );
     const url = `${
-      process.env.NODE_ENV !== "production"
-        ? "http://localhost:5000"
-        : "https://api.plan-szkolny.pl"
+      process.env.NODE_ENV !== 'production'
+        ? 'http://localhost:5000'
+        : 'https://api.plan-szkolny.kodario.pl'
     }/confirm/email/${emailToken}`;
 
     ctx.transporter.sendMail({
       to: email,
-      subject: "Potwierdzenie adresu email",
+      subject: 'Potwierdzenie adresu email',
       html: `
       <!DOCTYPE html>
       <html lang="pl">
@@ -152,12 +152,12 @@ const uploadUserAvatar = {
     const { filename, createReadStream } = await args.image;
 
     const fetchedUser = await User.findOne({ _id: ctx.user.id });
-    if (!fetchedUser) throw new Error("Nie odnaleziono użytkownika o takim id");
+    if (!fetchedUser) throw new Error('Nie odnaleziono użytkownika o takim id');
 
     const stream = createReadStream();
 
     const uploadParams = {
-      Bucket: config.get("awsBucket"),
+      Bucket: config.get('awsBucket'),
       Key: `users/user-${ctx.user.id}/avatar.jpg`,
       Body: stream,
     };
@@ -185,12 +185,12 @@ const deleteUserAvatar = {
       { useFindAndModify: false }
     );
 
-    if (!fetchedUser) throw new Error("Nie znaleziono użytkownika o takim id");
+    if (!fetchedUser) throw new Error('Nie znaleziono użytkownika o takim id');
     if (!fetchedUser.avatar.filename)
-      throw new Error("Ten użytkonik nie posiada avatara");
+      throw new Error('Ten użytkonik nie posiada avatara');
 
     const deleteParams = {
-      Bucket: config.get("awsBucket"),
+      Bucket: config.get('awsBucket'),
       Key: fetchedUser.avatar.filename,
     };
 
@@ -219,7 +219,7 @@ const resentEmailConfirm = {
 
     // Address already confirmed
     if (fetchedUser.confirmed) {
-      throw new Error("Email został już potwierdzony");
+      throw new Error('Email został już potwierdzony');
     }
 
     if (fetchedUser.email !== email) {
@@ -228,19 +228,19 @@ const resentEmailConfirm = {
 
     // Send confirm email
     const emailToken = jwt.sign(
-      { userId: fetchedUser.id, type: "REGISTER_CONFIRM" },
-      config.get("jwtSecret"),
-      { expiresIn: "1d" }
+      { userId: fetchedUser.id, type: 'REGISTER_CONFIRM' },
+      config.get('jwtSecret'),
+      { expiresIn: '1d' }
     );
     const url = `${
-      process.env.NODE_ENV !== "production"
-        ? "http://localhost:5000"
-        : "https://api.plan-szkolny.pl"
+      process.env.NODE_ENV !== 'production'
+        ? 'http://localhost:5000'
+        : 'https://api.plan-szkolny.kodario.pl'
     }/confirm/email/${emailToken}`;
 
     ctx.transporter.sendMail({
       to: email,
-      subject: "Potwierdzenie adresu email",
+      subject: 'Potwierdzenie adresu email',
       html: `
       <!DOCTYPE html>
       <html lang="pl">
@@ -260,7 +260,7 @@ const resentEmailConfirm = {
     });
 
     return {
-      msg: "Wiadomość została wysłana",
+      msg: 'Wiadomość została wysłana',
     };
   },
 };
@@ -274,14 +274,14 @@ const changePassword = {
   },
   resolve: async (_, args, ctx) => {
     isAuth(ctx);
-    const decoded = jwt.verify(args.token, config.get("jwtSecret"));
+    const decoded = jwt.verify(args.token, config.get('jwtSecret'));
     if (
       !decoded ||
       !decoded.userId ||
       !decoded.type ||
-      decoded.type !== "REMIND_PASSWORD"
+      decoded.type !== 'REMIND_PASSWORD'
     ) {
-      throw new Error("Błąd podczas zmiany hasła - niepoprawny token");
+      throw new Error('Błąd podczas zmiany hasła - niepoprawny token');
     }
 
     // Hash password

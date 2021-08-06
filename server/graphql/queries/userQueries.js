@@ -1,12 +1,12 @@
-const graphql = require("graphql");
-const User = require("../../models/User");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const config = require("config");
-const { isAuth } = require("../../helpers/authHelpers");
+const graphql = require('graphql');
+const User = require('../../models/User');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('config');
+const { isAuth } = require('../../helpers/authHelpers');
 
 const { GraphQLNonNull, GraphQLString, GraphQLList, GraphQLID } = graphql;
-const { LoginType, MessageType } = require("../objectTypes");
+const { LoginType, MessageType } = require('../objectTypes');
 
 // Login
 const login = {
@@ -17,16 +17,16 @@ const login = {
   },
   resolve: async (_, args) => {
     const { email, password } = args;
-    const user = await User.findOne({ email }).select("--password");
+    const user = await User.findOne({ email }).select('--password');
 
     const isEqual = user && (await bcrypt.compare(password, user.password));
     if (!user || !isEqual) {
-      throw new Error("Niepoprawny login i/lub hasło");
+      throw new Error('Niepoprawny login i/lub hasło');
     }
 
     // Create token
-    const token = jwt.sign({ userId: user.id }, config.get("jwtSecret"), {
-      expiresIn: "3d",
+    const token = jwt.sign({ userId: user.id }, config.get('jwtSecret'), {
+      expiresIn: '3d',
     });
 
     return {
@@ -44,7 +44,7 @@ const authUser = {
   },
   resolve: async (_, args, ctx) => {
     try {
-      const decoded = jwt.verify(args.token, config.get("jwtSecret"));
+      const decoded = jwt.verify(args.token, config.get('jwtSecret'));
       const myUser = await User.findOne({ _id: decoded.userId });
       if (decoded && decoded.userId) {
         return {
@@ -70,26 +70,26 @@ const remindPassword = {
     const fetchedUser = await User.findOne({ email });
 
     if (!fetchedUser) {
-      throw new Error("Nie znaleziono użytkownika o takim adresie email");
+      throw new Error('Nie znaleziono użytkownika o takim adresie email');
     }
 
     // Create token
     const token = jwt.sign(
-      { userId: fetchedUser._id, type: "REMIND_PASSWORD" },
-      config.get("jwtSecret"),
-      { expiresIn: "20m" }
+      { userId: fetchedUser._id, type: 'REMIND_PASSWORD' },
+      config.get('jwtSecret'),
+      { expiresIn: '20m' }
     );
 
     // Send confirm email
     const url = `${
-      process.env.NODE_ENV !== "production"
-        ? "http://localhost:3000"
-        : "https://plan-szkolny.pl"
+      process.env.NODE_ENV !== 'production'
+        ? 'http://localhost:3000'
+        : 'https://plan-szkolny.kodario.pl'
     }/confirm/zmiana-hasla?token=${token}`;
 
     ctx.transporter.sendMail({
       to: email,
-      subject: "Zmiana hasła",
+      subject: 'Zmiana hasła',
       html: `
       <!DOCTYPE html>
       <html lang="pl">
@@ -109,7 +109,7 @@ const remindPassword = {
     });
 
     return {
-      msg: "Wysłano email",
+      msg: 'Wysłano email',
     };
   },
 };
@@ -124,26 +124,26 @@ const sendChangeEmailInfo = {
     const fetchedUser = await User.findOne({ _id: ctx.user.id });
 
     if (!fetchedUser) {
-      throw new Error("Nie znaleziono użytkownika o takim adresie email");
+      throw new Error('Nie znaleziono użytkownika o takim adresie email');
     }
 
     // Create token
     const token = jwt.sign(
-      { userId: fetchedUser._id, type: "CHANGE_EMAIL_FIRST_STEP" },
-      config.get("jwtSecret"),
-      { expiresIn: "20m" }
+      { userId: fetchedUser._id, type: 'CHANGE_EMAIL_FIRST_STEP' },
+      config.get('jwtSecret'),
+      { expiresIn: '20m' }
     );
 
     // Send confirm email
     const url = `${
-      process.env.NODE_ENV !== "production"
-        ? "http://localhost:3000"
-        : "https://plan-szkolny.pl"
+      process.env.NODE_ENV !== 'production'
+        ? 'http://localhost:3000'
+        : 'https://plan-szkolny.kodario.pl'
     }/confirm/zmiana-emaila?token=${token}`;
 
     ctx.transporter.sendMail({
       to: fetchedUser.email,
-      subject: "Zmiana adresu email",
+      subject: 'Zmiana adresu email',
       html: `
       <!DOCTYPE html>
       <html lang="pl">
@@ -163,7 +163,7 @@ const sendChangeEmailInfo = {
     });
 
     return {
-      msg: "Wysłano email",
+      msg: 'Wysłano email',
     };
   },
 };
@@ -180,38 +180,38 @@ const sendChangeEmailToNewAddress = {
     isAuth(ctx);
     const { newEmail, firstStepToken } = args;
 
-    const decodedToken = jwt.verify(firstStepToken, config.get("jwtSecret"));
+    const decodedToken = jwt.verify(firstStepToken, config.get('jwtSecret'));
     if (
       !decodedToken ||
       !decodedToken.userId ||
       !decodedToken.type ||
-      decodedToken.type !== "CHANGE_EMAIL_FIRST_STEP"
+      decodedToken.type !== 'CHANGE_EMAIL_FIRST_STEP'
     ) {
-      throw new Error("Niepoprawny token uwierzytelniający");
+      throw new Error('Niepoprawny token uwierzytelniający');
     }
 
     const fetchedUser = await User.findById(decodedToken.userId);
     if (!fetchedUser) {
-      throw new Error("Nie odnaleziono użytkownika o takim id");
+      throw new Error('Nie odnaleziono użytkownika o takim id');
     }
 
     // Create token
     const newToken = jwt.sign(
-      { userId: fetchedUser._id, newEmail, type: "CHANGE_EMAIL_SECOND_STEP" },
-      config.get("jwtSecret"),
-      { expiresIn: "20m" }
+      { userId: fetchedUser._id, newEmail, type: 'CHANGE_EMAIL_SECOND_STEP' },
+      config.get('jwtSecret'),
+      { expiresIn: '20m' }
     );
 
     // Send confirm email
     const url = `${
-      process.env.NODE_ENV !== "production"
-        ? "http://localhost:3000"
-        : "https://plan-szkolny.pl"
+      process.env.NODE_ENV !== 'production'
+        ? 'http://localhost:3000'
+        : 'https://plan-szkolny.kodario.pl'
     }/confirm/new-email/${newToken}`;
 
     ctx.transporter.sendMail({
       to: newEmail,
-      subject: "Potwierdź nowy adres email",
+      subject: 'Potwierdź nowy adres email',
       html: `
       <!DOCTYPE html>
       <html lang="pl">
@@ -231,7 +231,7 @@ const sendChangeEmailToNewAddress = {
     });
 
     return {
-      msg: "Wysłano email",
+      msg: 'Wysłano email',
     };
   },
 };
