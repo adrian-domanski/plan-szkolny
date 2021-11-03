@@ -34,7 +34,7 @@
     "react-dom": "16.13.0",
     "react-particles-js": "^2.7.1",
     "socket.io-client": "^2.3.0",
-    "validator": "^12.2.0"
+    "validator": "^13.7.0"
   },
   "proxy": "http://localhost:5000"
 }
