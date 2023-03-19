@@ -18,7 +18,3 @@ This project was created in purpose to organize school commitments.
 - Nodemailer
 - JWT
 - AWS S3
-
-## Live demo
-
-Open [https://plan-szkolny.kodario.pl/](https://plan-szkolny.kodario.pl/) to view it in the browser.
